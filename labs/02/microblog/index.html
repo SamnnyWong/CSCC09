@@ -9,17 +9,57 @@
 <body>
     <header>
         <a href="/" id="title">Microblog</a>
+        <a href="/profile.html" class="btn header_btn" id="profile_button">Update Profile</a>
     </header>
-    
+
     <form class="complex_form" id="create_message_form">
-      <div class="form_title">Post a message</div>
-      <input type="text" class="form_element" placeholder="Enter your name" name="user_name" required/>
+        <div class="form_title"> Post a message </div>
+        <input type="text" class="form_element" placeholder="Enter your name" name="user_name" required/>
+        <textarea rows="5" class="form_element" placeholder="Enter your message" name="user_name" ></textarea>
+        <div class="btn" name="Submit"> Submit </div>
+
+
     </form>
-    
+
     <div id="messages">
-    </div>
-    
-    <footer>
+
+        <div class="message_container">
+            <div class =icon_container>
+                <img src="media/user.png" width="50px" height="50px">
+                <div>Alice</div>
+            </div>
+            <div class="comment_container">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+            <div class =upvote_container>
+                <div>0</div>
+            </div>
+            <div class = downvote_container>
+                <div>0</div>
+            </div>
+            <div class = delete_container></div>
+        </div>
+
+
+
+
+        <div class="message_container">
+            <div class =icon_container>
+                <img src="media/user.png" width="50px" height="50px">
+                <div>Alice</div>
+            </div>
+            <div class="comment_container">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+            <div class =upvote_container>
+                <div>0</div>
+            </div>
+            <div class = downvote_container>
+                <div>0</div>
+            </div>
+            <div class = delete_container></div>
+        </div>
+
+
+        <footer>
         <a href='/credits.html'>credits</a>
     </footer>
 </body>
