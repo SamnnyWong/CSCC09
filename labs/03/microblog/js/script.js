@@ -36,7 +36,7 @@ window.onload = function(){
             increment(downButton);
         });
         deleteButton.addEventListener("click", function(){
-           document.getElementById(this.parentNode.id).remove();
+            document.getElementById(this.parentNode.id).remove();
         });
 
 
