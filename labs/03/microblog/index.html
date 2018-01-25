@@ -6,7 +6,7 @@
     <link href="style/main.css" rel="stylesheet" type="text/css"/>
     <link href="style/messages.css" rel="stylesheet" type="text/css"/>
     <link href="style/form.css" rel="stylesheet" type="text/css"/>
-    <script src="js/script.js"></script>
+    <!--<script src="js/script.js"></script>-->
 </head>
 <body>
 <header>
@@ -25,6 +25,50 @@
 
 <footer>
     <a href='/credits.html'>credits</a>
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+
+
+    <a href="#" id="reset">reset local storage</a>
+    <script type="text/javascript">
+    document.getElementById('reset').addEventListener("click", function(event) {
+    (function() {
+    localStorage.clear();
+    }).call(document.getElementById('reset'), event);
+    location.reload();
+    });
+    </script>
+
+    <a href="#" id="visualize">show local storage</a>
+    <script type="text/javascript">
+    document.getElementById('visualize').addEventListener("click", function(event) {
+    (function() {
+    console.log(localStorage.getItem("messages"));
+    console.log();
+    }).call(document.getElementById('visualize'), event);
+    });
+    </script>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+
 </footer>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

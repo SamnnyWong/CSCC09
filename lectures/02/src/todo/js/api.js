@@ -1,20 +1,20 @@
 var api = (function(){
     "use strict";
-    
+
     var module = {};
-    
+
     if (!localStorage.getItem('todo')){
         localStorage.setItem('todo', JSON.stringify({next: 0, items: []}));
     }
-        
+
     /*  ******* Data types *******
-        
-        item objects must have at least the following attributes:
-            - (String) itemId 
-            - (String) content
-    
-    ****************************** */ 
-    
+
+     item objects must have at least the following attributes:
+     - (String) itemId
+     - (String) content
+
+     ****************************** */
+
     // add an item
     // return an item object
     module.addItem = function(content){
@@ -24,7 +24,7 @@ var api = (function(){
         localStorage.setItem('todo', JSON.stringify(todo));
         return item;
     }
-    
+
     // delete an item given its itemId
     module.deleteItem = function(itemId){
         var todo = JSON.parse(localStorage.getItem('todo'));
@@ -37,13 +37,13 @@ var api = (function(){
         localStorage.setItem('todo', JSON.stringify(todo));
         return item;
     }
-    
+
     // get all items in the list
     // return an array of item objects
     module.getItems = function(){
-       var todo = JSON.parse(localStorage.getItem('todo'));
-       return todo.items;
+        var todo = JSON.parse(localStorage.getItem('todo'));
+        return todo.items;
     }
-    
+
     return module;
 }());
