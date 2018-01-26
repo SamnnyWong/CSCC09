@@ -13,43 +13,99 @@ var api = (function(){
 
     // add a message
     // return a message object
-    module.addMessage = function(author, content){
+
+
+    if (!localStorage.getItem('counter')){
+        localStorage.setItem('counter', JSON.stringify(0));
+    }
+
+    if (!localStorage.getItem('messages')){
+        localStorage.setItem('messages', JSON.stringify({}));
+    }
+
+    module.addMessage = function(username, content, upvoteCount, downvoteCount, mid){
+        /////////////////////////////////////////////////////////////
+        var messages = JSON.parse(localStorage.getItem("messages"));
+        /////////////////////////////////////////////////////////////
+        var myJasonObj = {};
+        myJasonObj.username = username;
+        myJasonObj.content = content;
+        myJasonObj.upvoteCount = upvoteCount;
+        myJasonObj.downvoteCount = downvoteCount;
+        messages[mid] = myJasonObj;
+        localStorage.setItem("messages", JSON.stringify(messages));
 
         // store data here
-        return {author: author, content: content}
+        return {author: username, content: content}
     }
 
     // delete a message given its messageId
     // return a message object
     module.deleteMessage = function(messageId){
+        var oldMessages = JSON.parse(localStorage.getItem("messages"));
+        delete oldMessages[messageId];
+        localStorage.setItem("messages", JSON.stringify(oldMessages));
+        return oldMessages;
 
     }
-
-
-
-    //#################################################3
     // upvote a message given its messageId
     // return a message object
-    module.upvoteMessage = function(messageId){
+    module.upvoteMessage = function(messageId, upvoteCount){
         var oldMessages = JSON.parse(localStorage.getItem("messages"));
-        oldMessages[messageId].upvoteCount ++;
+        oldMessages[messageId].upvoteCount =  upvoteCount;
 
-        localStorage.setItem("messages", JSON.stringify(messages));
+        localStorage.setItem("messages", JSON.stringify(oldMessages));
         return oldMessages[messageId];
     }
-    //#################################################3
+
+
 
     // downvote a message given its messageId
     // return a message object
-    module.downvoteMessage = function(messageId){
+    module.downvoteMessage = function(messageId, downvoteCount){
+        var oldMessages = JSON.parse(localStorage.getItem("messages"));
+        oldMessages[messageId].downvoteCount =  downvoteCount;
+
+        localStorage.setItem("messages", JSON.stringify(oldMessages));
+        return oldMessages[messageId];
 
     }
 
     // get 5 latest messages given an offset
     // return an array of message objects
-    module.getMessages = function(offset=0){
+    module.getOldMessages = function(){
+        //for loop
+        return JSON.parse(localStorage.getItem("messages"));
+    }
 
+
+
+
+    module.getCounter = function(){
+        return JSON.parse(localStorage.getItem("counter"));
+    }
+
+
+
+    module.counterInc = function(){
+        var count = JSON.parse(localStorage.getItem("counter"));
+
+        localStorage.setItem('counter', JSON.stringify(count+1));
     }
 
     return module;
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
