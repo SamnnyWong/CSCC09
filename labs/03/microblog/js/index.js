@@ -26,7 +26,7 @@
             var mid = "message" + api.getCounter();
             // i dont like this...
 
-            api.addMessage(username, content, 0, 0, mid);
+            api.addMessage(username, content );
             postMessage(username, content, 0, 0, mid);
         });
     });
