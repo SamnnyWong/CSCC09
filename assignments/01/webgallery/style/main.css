@@ -57,6 +57,13 @@
 
 
 
+.image_view_container{
+
+    display: grid;
+    grid-template-column: auto 80% auto;
+
+}
+
 
 
 .complex_form{
@@ -81,23 +88,31 @@
     border-radius:10px;
     padding:5px 10px 5px 10px;
 }
-.btn{
-    border-radius:10px;
-    text-align:center;
-    font-size: 20px;
-    color: #3C3D3F;
-    background: #ffffff;
-    border: 2px #3C3D3F solid;
-    padding: 10px 20px 10px 20px;
-}
-
 
 
 .comment_container {
-    width: 80%;
-    margin:0 auto;
-    margin-top: 40px;
-    height: auto;
+    width: 40%;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    padding: 10px;
+}
+
+.edit_author{
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    height: 20px;
+    overflow: auto;
+    padding: 2px;
+    width: 400px;
+}
+
+.edit_content{
+    border: 1px solid gray;
+    font: medium -moz-fixed;
+    height: 160px;
+    overflow: auto;
+    padding: 2px;
+    width: 400px;
 }
 
 .comment {
@@ -105,6 +120,7 @@
     flex-direction: row;
     justify-content: space-between;
     height: auto;
+    padding-bottom: 5px;
     border-bottom: 1px solid black;
 }
 
@@ -118,11 +134,53 @@
 
 .date {
     text-align: right;
-    width: 150px;
+    width: 300px;
 }
 
 .content {
     width: 100%;
     height: auto;
     word-break:break-all;
+}
+
+
+
+/*.comment_content {*/
+    /*-moz-appearance: textfield-multiline;*/
+    /*-webkit-appearance: textarea;*/
+    /*border: 1px solid black;*/
+    /*font: medium -moz-fixed;*/
+    /*font: -webkit-small-control;*/
+    /*height: 28px;*/
+    /*overflow: auto;*/
+    /*padding: 2px;*/
+    /*resize: both;*/
+    /*width: 400px;*/
+    /*border-style: solid;*/
+/*}*/
+
+
+
+
+
+
+.btn {
+
+    text-align: center;
+    background: #000000;
+    background-image: -webkit-linear-gradient(top, #000000, #7d8285);
+    background-image: -moz-linear-gradient(top, #000000, #7d8285);
+    background-image: -ms-linear-gradient(top, #000000, #7d8285);
+    background-image: -o-linear-gradient(top, #000000, #7d8285);
+    background-image: linear-gradient(to bottom, #000000, #7d8285);
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #3cb0fd;
+    text-decoration: none;
 }

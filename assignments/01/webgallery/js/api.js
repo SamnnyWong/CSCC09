@@ -30,6 +30,10 @@ var api = (function(){
         localStorage.setItem('comments', JSON.stringify({}));
     }
 
+    if (!localStorage.getItem('current_Id')){
+        localStorage.setItem('current_Id', JSON.stringify(""));
+    }
+
     //guid generator
 
     function guid() {
@@ -39,23 +43,39 @@ var api = (function(){
         });
     }
 
-    
-    // return a readable date
-    function retrunDate() {
-        var date = new Date();
-        var components = [
-            date.getYear(),
-            date.getMonth(),
-            date.getDate(),
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds(),
-            date.getMilliseconds()
-        ];
+    module.getNextImageObj = function(curr_imageId){
+        // somehitn is wrong in this fuction
+        var images =  JSON.parse(localStorage.getItem("images"));
+        var images_guid = JSON.parse(localStorage.getItem("images_guid"));
+        var index = images_guid.indexOf(curr_imageId);
+        //out of bound issue
+        return images[images_guid[index +1]];
+    }
 
-        var id = components.join("");
-        return id;
-        
+    module.getPrevImageObj = function(curr_imageId){
+        var images =  JSON.parse(localStorage.getItem("images"));
+        var images_guid = JSON.parse(localStorage.getItem("images_guid"));
+        var index = images_guid.indexOf(curr_imageId);
+        return images[images_guid[index -1]];
+    }
+
+    module.setCurrentID = function(imageId){
+        localStorage.setItem("current_Id", JSON.stringify(imageId));
+    }
+
+    module.getCurrentID = function(){
+        return JSON.parse(localStorage.getItem("current_Id"));
+    }
+
+
+
+    // return a readable date
+    function returnCreateDate(){
+
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+        // var month = monthNames[date.getMonth()];
+        return new Date().toISOString().split('T')[0];
     }
 
 
@@ -63,22 +83,20 @@ var api = (function(){
     // return an image object
 
 
-    module.addImage = function(title, author, imageURL){
+    module.addImage  = function(title, author, imageURL){
         var images = JSON.parse(localStorage.getItem("images"));
+        var images_guid = JSON.parse(localStorage.getItem("images_guid"));
+        var id = guid();
         var imageJasonObject = {};
         imageJasonObject.title = title;
         imageJasonObject.author = author;
         imageJasonObject.imageURL = imageURL;
-        var id = guid();
+        imageJasonObject.id=id;
+        images_guid.push(id);
         images[id] = imageJasonObject;
-        localStorage.setItem("images", JSON.stringify(images));
-        var images_guid = JSON.parse(localStorage.getItem("images_guid"));
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        console.log(localStorage.getItem("images_guid"));
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        images_guid.unshift(id);
 
         localStorage.setItem("images_guid", JSON.stringify(images_guid));
+        localStorage.setItem("images", JSON.stringify(images));
         return imageJasonObject;
         
     }
@@ -92,7 +110,6 @@ var api = (function(){
         delete images[imageId];
         localStorage.setItem("images", JSON.stringify(images));
         delete images_guid[id.indexOf(imageId)];
-
         return deletedImage;
 
 
@@ -103,7 +120,7 @@ var api = (function(){
     
     // get an image from the gallery given its imageId
     // return an image object
-    module.getImages = function(imageId){
+    module.getImage = function(imageId){
         var images = JSON.parse(localStorage.getItem("images"));
         return images[imageId];
         
@@ -125,14 +142,19 @@ var api = (function(){
     // return a comment object
     module.addComment = function(imageId, author, content){
         var comments = JSON.parse(localStorage.getItem("comments"));
-
+        var comment_Id = guid();
         var commentJasonObj = {};
         commentJasonObj.author = author;
         commentJasonObj.content = content;
-        commentJasonObj.createDate = retrunDate();
-        comments[imageId][guid()] = commentJasonObj;
+        commentJasonObj.createDate = returnCreateDate();
+        commentJasonObj.cid = comment_Id;
+        if (comments[imageId] == null){
+
+            comments[imageId] = {};
+        }
+        comments[imageId][comment_Id] = commentJasonObj;
         localStorage.setItem("comments", JSON.stringify(comments));
-        return {author: username, content: content} //???
+        return commentJasonObj
     }
     
     // delete a comment to an image
@@ -146,30 +168,22 @@ var api = (function(){
     }
 
 
-    module.getNextImageId = function(imageId){
-        var images = JSON.parse(localStorage.getItem("images"));
-
+    module.getComments = function(){
+        return JSON.parse(localStorage.getItem("comments")).keys();
     }
 
 
-    module.getPrevImageId = function(imageId){
-        return JSON.parse(localStorage.getItem("images"));
-    }
 
 
-    module.getAllCommentsObj = function(imageId, offset=0){
-        return JSON.parse(localStorage.getItem("images"));
-    }
-    
-    // get 10 latest comments given an offset 
-    // return an array of comment objects
-    module.getComments = function(imageId, offset=0){
+    module.get_image_comments = function(imageId){
+        var comments = JSON.parse(localStorage.getItem("comments"));
+        return comments[imageId];
 
-        return JSON.parse(localStorage.getItem("images")).keys();
-        //???
     }
     
     return module;
+
+
 })();
 
 

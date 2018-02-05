@@ -1,0 +1,23 @@
+<html>
+<script src="https://aframe.io/releases/0.6.1/aframe.min.js"></script>
+<script src="https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js"></script>
+<script>THREEx.ArToolkitContext.baseURL = 'https://rawgit.com/jeromeetienne/ar.js/master/three.js/'</script>
+<body style='margin : 0px; overflow: hidden;'>
+<a-scene embedded artoolkit='sourceType: webcam;'>
+    <a-box src="https://lh4.ggpht.com/XhcTjy4jSJN-6I2rp0c_L8ElgqE3k6rxPBLDiuEZVKldWZ7QHhvQiKmgTjR9KksOTnI=w300" radius="0.5" position="0 0.5 0" segments-height="53">
+    <!--<a-sphere src="img/map.jpg" radius="0.5" position="0 0.5 0" segments-height="53" color = blue>-->
+        <!--<a-animation attribute="scale"-->
+                     <!--dur="1000"-->
+                     <!--from= "1 1 1"-->
+                     <!--to="2 2 2"-->
+                     <!--direction='alternate-reverse'-->
+                     <!--easing= "ease-in-out-circ"-->
+                     <!--repeat="indefinite">-->
+        <!--</a-animation>-->
+    <!--</a-sphere>-->
+    <!--<a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>-->
+    <a-marker-camera preset='hiro'></a-marker-camera>
+    </a-box>
+</a-scene>
+</body>
+</html>﻿
