@@ -28,12 +28,14 @@
         });
         document.querySelector("#messages").prepend(elmt);
     }
-    
+
     function refreshMessages(){
         document.querySelector("#messages").innerHTML = "";
-        api.getMessages().reverse().forEach(insertMessage);
+        api.getMessages(0, function(err, messages){
+            if (err) console.log(err);
+            else messages.reverse().forEach(insertMessage);
+        });
     }
-    
     window.addEventListener('load', function(){
         refreshMessages();
         document.querySelector('#create_message_form').addEventListener('submit', function(e){        
@@ -41,8 +43,10 @@
             var author = document.getElementById("post_name").value;
             var content = document.getElementById("post_content").value;
             document.getElementById("create_message_form").reset();
-            api.addMessage(author, content, callback); //???????????????????
-            refreshMessages();
+            api.addMessage(author, content, function(err, message){
+                if (err) console.log(err);
+                else refreshMessages();
+            });
         });    
     });
 }())

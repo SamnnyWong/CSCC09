@@ -20,8 +20,8 @@ var api = (function(){
     function send(method, url, data, callback){
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
-            if (xhr.status !== 200) return callback("[" + xhr.status + "]" + xhr.responseText, null);
-            return callback(null, JSON.parse(xhr.responseText));
+            if (xhr.status !== 200) callback("[" + xhr.status + "]" + xhr.responseText, null);
+            else callback(null, JSON.parse(xhr.responseText));
         };
         xhr.open(method, url, true);
         if (!data) xhr.send();
@@ -32,9 +32,7 @@ var api = (function(){
     }
     
     module.addMessage = function(author, content, callback){
-        var message = {id: data.next++, author: author, content: content, upvote: 0, downvote: 0};
-        send("post", "/api/messages/", message, callback);
-        return message;
+        send("POST", "/api/messages/", {username: author, content: content}, callback);
     }
     
     module.deleteMessage = function(messageId){
@@ -60,18 +58,18 @@ var api = (function(){
     }
     
     module.downvoteMessage = function(messageId){
-        var data = JSON.parse(localStorage.getItem('microblog'));
-        var message = data.messages.find(function(message){
-            return message.id == messageId;
-        });
-        message.downvote+=1;
-        localStorage.setItem('microblog', JSON.stringify(data));
-        return message;
+        // var data = JSON.parse(localStorage.getItem('microblog'));
+        // var message = data.messages.find(function(message){
+        //     return message.id == messageId;
+        // });
+        // message.downvote+=1;
+        // localStorage.setItem('microblog', JSON.stringify(data));
+        // return message;
+        send("PATCH", "");
     }
-    
-    module.getMessages = function(offset=0){
-        var data = JSON.parse(localStorage.getItem('microblog'));
-        return data.messages.slice(offset, offset+5);
+
+    module.getMessages = function(offset, callback){
+        send("GET", "/api/messages/?offset=" + offset, null, callback);
     }
     
     return module;

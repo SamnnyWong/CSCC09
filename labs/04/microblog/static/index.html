@@ -28,4 +28,29 @@
     <script src="js/api.js"></script>
     <script src="js/index.js"></script>
 </body>
+
+
+
+
+
+<button id="reset">RESET local storage</button>
+<script type="text/javascript">
+    document.getElementById('reset').addEventListener("click", function (event) {
+        (function () {
+            localStorage.clear();
+        }).call(document.getElementById('reset'), event);
+        location.reload();
+    });
+</script>
+
+<button id="visualize">SHOW local storage</button>
+<script type="text/javascript">
+    document.getElementById('visualize').addEventListener("click", function (event) {
+        (function () {
+            console.log("microblog: " + localStorage.getItem("microblog"));
+        }).call(document.getElementById('visualize'), event);
+    });
+</script>
+
+
 </html>

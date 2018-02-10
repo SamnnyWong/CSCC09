@@ -23,6 +23,22 @@ var Message = (function(){
     }
 }());
 
+
+
+// class Message {
+//     static int id = 0;
+// ...
+//     public Message(Map<String, String>msg) {
+//     this._id = id++;
+//     this.content = msg["content"];
+//     this.username = msg["username"];
+//     this.upvote = 0;
+//     this.downvote = 0;
+// }
+// }
+
+
+
 var messages = [];
 var users = {};
 
@@ -37,6 +53,18 @@ app.post('/api/users/', function (req, res, next) {
 app.post('/api/messages/', function (req, res, next) {
     var message = new Message(req.body);
     messages.unshift(message);
+    return res.json(message);
+});
+
+// Delete
+
+app.delete('/api/messages/:id/', function (req, res, next) {
+    var index = messages.findIndex(function(message){
+        return message._id == req.params.id;
+    });
+    if (index === -1) return res.status(404).end("Message id:" + req.params.id + " does not exists");
+    var message = messages[index];
+    messages.splice(index, 1);
     return res.json(message);
 });
 
@@ -66,18 +94,6 @@ app.patch('/api/messages/:id/', function (req, res, next) {
             message.downvote+=1;
             break;
     }
-    return res.json(message);
-});
-
-// Delete
-
-app.delete('/api/messages/:id/', function (req, res, next) {
-    var index = messages.findIndex(function(message){
-        return message._id == req.params.id;
-    });
-    if (index === -1) return res.status(404).end("Message id:" + req.params.id + " does not exists");
-    var message = messages[index];
-    messages.splice(index, 1);
     return res.json(message);
 });
 
