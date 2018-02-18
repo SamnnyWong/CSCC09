@@ -7,8 +7,6 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static('static'));
-
 const Datastore = require('nedb');
 var users = new Datastore({ filename: 'db/users.db', autoload: true });
 var items = new Datastore({ filename: path.join(__dirname,'db', 'items.db'), autoload: true, timestampData : true});
@@ -47,11 +45,12 @@ app.use(function(req, res, next){
     next();
 });
 
+app.use(express.static('static'));
+
 app.use(function (req, res, next){
     console.log("HTTP request", req.method, req.url, req.body);
     next();
 });
-
 
 var isAuthenticated = function(req, res, next) {
     if (!req.user) return res.status(401).end("access denied");
@@ -143,11 +142,6 @@ app.delete('/api/items/:id/', isAuthenticated, function (req, res, next) {
             res.json(item);
          });
     });    
-});
-
-app.use(function (req, res, next){
-    console.log("Storage", JSON.stringify(items, null, 2));
-    console.log("HTTP Response", res.statusCode);
 });
 
 const http = require('http');
