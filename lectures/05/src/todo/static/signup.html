@@ -8,19 +8,14 @@
 </head>
 <body>
     <header>
-        <a href="/" id="title">Microblog</a>
+        <a href="/" id="title">ToDo</a>
     </header>
     
-    <div class="container" id="error">
-    </div>
-
     <div class="container">
-        <form class="complex_form" id="signup" action='/api/users/' method="POST" enctype="multipart/form-data">
-        <!--<form class="complex_form" id="signup" action='/api/users/' method="POST">-->
-          <div class="form_title">Add a user</div>
+        <form class="complex_form" action='/signup/' method="POST">
           <input type="text" name="username" class="form_element" placeholder="Enter a username" required/>
-          <input type="file" name="picture" class="form_element" required/>
-          <input type="submit" class="btn"/>
+          <input type="password" name="password" class="form_element" placeholder="Enter a password" required/>
+          <button type="submit" class="btn">Sign Up</button>
         </form>
     </div>
     

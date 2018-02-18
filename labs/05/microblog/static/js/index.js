@@ -7,7 +7,7 @@
         elmt.innerHTML= username;
         document.querySelector("#post_username").prepend(elmt);
     }
-    
+
     function refreshUsers(){
         document.querySelector("#post_username").innerHTML = "";
         api.getUsers(function(err, usernames){
@@ -16,19 +16,25 @@
                 if (usernames.length === 0) document.querySelector("#welcome_message").classList.remove('hidden');
                 else {
                     document.querySelector("#create_message_form").classList.remove('hidden');
-                    usernames.forEach(insertUsername);
+                    for (var i = 0; i < usernames.length; i++) {
+                        console.log(usernames[i]._id);
+                        insertUsername(usernames[i]._id);
+                    }
+
+
                 }
             }
         });
     }
     
     function insertMessage(message){
+
         var elmt = document.createElement('div');
         elmt.className = "message";
         elmt.innerHTML=`
             <div class="message_user">
                 <img class="message_picture" src="media/user.png" alt="${message.username}">
-                <div class="message_username">${message.username}</div>
+                <!--<div class="message_username">${message.username}</div>-->
             </div>
             <div class="message_content">${message.content}</div>
             <div class="upvote-icon icon">${message.upvote}</div>
@@ -60,7 +66,13 @@
         document.querySelector("#messages").innerHTML = "";
         api.getMessages(0, function(err, messages){
             if (err) console.log(err);
-            else messages.reverse().forEach(insertMessage);
+
+            else {
+                for (var i = 0; i < messages.length; i++) {
+                    insertMessage(messages[i]);
+                }
+            }
+            // else console.log("something here");
         });
     }
     

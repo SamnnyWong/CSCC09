@@ -1,0 +1,24 @@
+{
+  "name": "cscc09",
+  "version": "1.0.0",
+  "description": "This is the source code for the CSCC09 Spring 2018 course website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamnnyWong/CSCC09.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamnnyWong/CSCC09/issues"
+  },
+  "homepage": "https://github.com/SamnnyWong/CSCC09#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "nedb": "^1.8.0"
+  }
+}
