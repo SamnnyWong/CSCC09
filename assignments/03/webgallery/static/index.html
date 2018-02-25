@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<br>
+<br bgcolor="#d3d3d3">
+
+<div id="rectangle"> this is banner</div>
+<h2>Web Gallery</h2>
+
+<button id="myBtn">Add Image</button>
+</br>
+</br>
+<!--<div class="image_view_container">-->
+    <button id="prev_button"><</button>
+    <image id="imageContainer" width="180px" border="1" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg"></image>
+    <button id="next_button">></button>
+<!--</div>-->
+
+</br>
+</br>
+
+
+<div>Title:</div>
+<div id="image_title"></div>
+<div>Author:</div>
+<div id="image_author"></div>
+
+
+
+
+<!--// this is the start of the fking modal-->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Upload an image</p>
+
+        <image id="preview_image" src="" width="480px"></image>
+        </br>
+        <input type="text" required id="postimage_title">
+        <input type="text" required id="postimage_author">
+        <input type="text" required id="postimage_imgurl">
+        <div id="preview_title"></div>
+        <div id="preview_author"></div>
+        <button id="btn_preview" class="">preview</button>
+        <button id="btn_upload_image" class="">Upload Image</button>
+    </div>
+</div>
+<!--this is the end of the fking modal-->
+
+</br>
+<div class="comment_container">
+    <div class="edit_author" id="comment_author" contenteditable data-text="Your name"></div>
+    <div class="edit_content" id="comment_content" contenteditable data-text="Add comment.."></div>
+    <div class="btn" id="btn_submit_comment">Submit</div>
+</div>
+
+
+<div id="comments"></div>
+
+
+</div>
+
+
+</br>
+<a href='/credits.html'>credits</a>
+</br>
+</br>
+<br>
+    <button onclick="copyToClipBoard(1)">dog1</button>
+    <input type="text" value="http://cdn1-www.dogtime.com/assets/uploads/gallery/siberian-husky-dog-breed-pictures/siberian-husky-dog-breed-pictures-2.jpg" id="myInput">
+    </br>
+
+    <script>
+        function copyToClipBoard(i){
+            var copyText = document.getElementById("myInput");
+            copyText.select();
+            document.execCommand("Copy");
+        }
+    </script>
+
+
+    <button id="reset">RESET local storage</button>
+    <script type="text/javascript">
+        document.getElementById('reset').addEventListener("click", function (event) {
+            (function () {
+                localStorage.clear();
+            }).call(document.getElementById('reset'), event);
+            location.reload();
+        });
+    </script>
+
+    <button id="visualize">SHOW local storage</button>
+    <script type="text/javascript">
+        document.getElementById('visualize').addEventListener("click", function (event) {
+            (function () {
+                console.log("images: " + localStorage.getItem("images"));
+                console.log("images_guid: " + localStorage.getItem("images_guid"));
+                console.log("currentid: " + localStorage.getItem("current_Id"));
+                console.log("comments: " + localStorage.getItem("comments"));
+            }).call(document.getElementById('visualize'), event);
+        });
+    </script>
+    <link href="style/main.css" rel="stylesheet" type="text/css">
+    <script src="js/api.js"></script>
+    <script src="js/index.js"></script>
+</footer>
+
+
+</body>
+</html>
