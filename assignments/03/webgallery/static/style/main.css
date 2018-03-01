@@ -91,29 +91,42 @@
 
 
 .comment_container {
-    width: 40%;
     display: grid;
     grid-template-rows: auto auto auto;
-    padding: 10px;
+    width: 400px;
 }
 
 .edit_author{
     border: 1px solid gray;
-    font: medium -moz-fixed;
-    height: 20px;
-    overflow: auto;
-    padding: 2px;
-    width: 400px;
+    height: 100%;
 }
 
 .edit_content{
     border: 1px solid gray;
-    font: medium -moz-fixed;
     height: 160px;
-    overflow: auto;
-    padding: 2px;
-    width: 400px;
 }
+
+
+.btn {
+    text-align: center;
+    background: #000000;
+    background-image: -webkit-linear-gradient(top, #000000, #7d8285);
+    background-image: -moz-linear-gradient(top, #000000, #7d8285);
+    background-image: -ms-linear-gradient(top, #000000, #7d8285);
+    background-image: -o-linear-gradient(top, #000000, #7d8285);
+    background-image: linear-gradient(to bottom, #000000, #7d8285);
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 13px;
+    height: 40%;
+    padding: 10px 20px 10px 20px;
+}
+
+.btn:hover {
+    background: #3cb0fd;
+    text-decoration: none;
+}
+
 
 .comment {
     display: flex; /* or inline-flex */
@@ -163,24 +176,3 @@
 
 
 
-
-.btn {
-
-    text-align: center;
-    background: #000000;
-    background-image: -webkit-linear-gradient(top, #000000, #7d8285);
-    background-image: -moz-linear-gradient(top, #000000, #7d8285);
-    background-image: -ms-linear-gradient(top, #000000, #7d8285);
-    background-image: -o-linear-gradient(top, #000000, #7d8285);
-    background-image: linear-gradient(to bottom, #000000, #7d8285);
-    font-family: Arial;
-    color: #ffffff;
-    font-size: 13px;
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
-}
-
-.btn:hover {
-    background: #3cb0fd;
-    text-decoration: none;
-}

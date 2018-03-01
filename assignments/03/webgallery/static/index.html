@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<br>
-<br bgcolor="#d3d3d3">
 
-<div id="rectangle"> this is banner</div>
-<h2>Web Gallery</h2>
+<!--<br bgcolor="#d3d3d3">-->
+
+<!--<div id="rectangle"> this is banner</div>-->
+
+<title>Web Gallery</title>
+<header>
+    <a href="/" id="title">Web Gallery</a>
+    <a href="/login.html" id="signin_button" class ="btn" >Sign in or Sign up</a>
+    <a href="/signout/" id="signout_button" class ="btn" >Sign out</a>
+</header>
+
+
+
+<div class="label_form hidden">
+    <label class="form_select">Select Gallery
+        <select id="post_username" class="form_select"></select>
+    </label>
+</div>
 
 <button id="myBtn">Add Image</button>
 </br>
 </br>
 <!--<div class="image_view_container">-->
-    <button id="prev_button"><</button>
+    <button id="prev_button"></button>
     <image id="imageContainer" width="180px" border="1" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg"></image>
     <button id="next_button">></button>
 <!--</div>-->
@@ -32,18 +46,35 @@
         <span class="close">&times;</span>
         <p>Upload an image</p>
 
-        <image id="preview_image" src="" width="480px"></image>
+        <image id="preview_image" width="480px"/>
         </br>
-        <input type="text" required id="postimage_title">
-        <input type="text" required id="postimage_author">
-        <input type="text" required id="postimage_imgurl">
-        <div id="preview_title"></div>
-        <div id="preview_author"></div>
-        <button id="btn_preview" class="">preview</button>
-        <button id="btn_upload_image" class="">Upload Image</button>
+        <form action='/api/images/' method="POST" enctype="multipart/form-data">
+            Title: <input type="text" title="" id="postimage_title"/>
+            </br>
+            URL: <input type="text" title="" id="postimage_imgurl"/>
+            </br>
+            <input type="file" name="picture" class="form_element" required/>
+            </br>
+            </br>
+            <button id="btn_preview" class="">preview</button>
+            <button id="btn_upload_image" type="submit" class="">Upload Image</button>
+        </form>
     </div>
 </div>
 <!--this is the end of the fking modal-->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </br>
 <div class="comment_container">

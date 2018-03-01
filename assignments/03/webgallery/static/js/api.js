@@ -22,14 +22,18 @@ var api = (function(){
 
      -Non authenticated cannot read any picture nor comment
      -Non-authenticated can sign-up and sign-in into the application
+
      -Authenticated users can sign-out of the application
      -Authenticated users can browse any gallery
-     -Gallery owners can upload and delete pictures to their own gallery only
      -Authenticated users can post comments on any picture of any gallery
      -Authenticated users can delete any one of their own comments but not others
+
      -Gallery owners can delete any comment on any picture from their own gallery
-    
-    ****************************** */
+     -Gallery owners can upload and delete pictures to their own gallery only
+
+
+
+     ****************************** */
 
 
     function send(method, url, data, callback){
@@ -61,7 +65,7 @@ var api = (function(){
     
     // add an image to the gallery
     module.addImage = function(title, file, callback){
-        
+        send("POST", "//api/images/", callback);
     }
     
     // delete an image from the gallery given its imageId

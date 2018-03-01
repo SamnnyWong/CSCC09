@@ -6,45 +6,42 @@
      */
 
     window.addEventListener('load', function () {
-        var images = api.getAllImagesObj(); // return a list of images
-        var currentId = api.getCurrentID();
-        var imageObj = images[currentId];
-        var image_comments = api.get_image_comments(currentId);
-        for (var cid in image_comments) {
-            var commentObj = image_comments[cid];
-            postComments(commentObj.author, commentObj.content, commentObj.createDate, commentObj.cid)
-        }
+        // var images = api.getAllImagesObj(); // return a list of images
+        // var currentId = api.getCurrentID();
+        // var imageObj = images[currentId];
+        // var image_comments = api.get_image_comments(currentId);
+        // for (var cid in image_comments) {
+        //     var commentObj = image_comments[cid];
+        //     postComments(commentObj.author, commentObj.content, commentObj.createDate, commentObj.cid)
+        // }
 
-        //out of bound issue
+        // if (Object.keys(images).length != 0) {
+        //     set_ui(imageObj);
+        //     //reload the dammn thing here
+        // }
 
-        // var comments = api.getAllCommentsObj();
-        if (Object.keys(images).length != 0) {
-            set_ui(imageObj);
-            //reload the dammn thing here
-        }
+        // document.getElementById("btn_preview").addEventListener('click', function () {
+        //     var url = document.getElementById("postimage_imgurl").value;
+        //     var title = document.getElementById("postimage_title").value;
+        //     var author = document.getElementById("postimage_author").value;
+        //     // document.getElementById("preview_image").src=url;
+        //     document.getElementById("preview_title").innerHTML = title;
+        //     document.getElementById("preview_author").innerHTML = author;
+        // });
 
-        document.getElementById("btn_preview").addEventListener('click', function () {
-            var url = document.getElementById("postimage_imgurl").value;
-            var title = document.getElementById("postimage_title").value;
-            var author = document.getElementById("postimage_author").value;
-            document.getElementById("preview_image").src=url;
-            document.getElementById("preview_title").innerHTML = title;
-            document.getElementById("preview_author").innerHTML = author;
-        });
-
-        document.getElementById("btn_upload_image").addEventListener('click', function () {
-            var title = document.getElementById("postimage_title").value;
-            var author = document.getElementById("postimage_author").value;
-            var imageURL = document.getElementById("postimage_imgurl").value;
-
-            var imageObj = api.addImage(title, author, imageURL);
-            if (Object.keys(api.getAllImagesObj()).length == 1){
-                api.setCurrentID(imageObj.id);
-                set_ui(imageObj);
-            }
-            modal.style.display = "none";
-            reset_from();
-        });
+        // document.getElementById("btn_upload_image").addEventListener('click', function () {
+        //     var title = document.getElementById("postimage_title").value;
+        //     var author = document.getElementById("postimage_author").value;
+        //     var imageURL = document.getElementById("postimage_imgurl").value;
+        //
+        //     var imageObj = api.addImage(title, author, imageURL);
+        //     if (Object.keys(api.getAllImagesObj()).length == 1){
+        //         api.setCurrentID(imageObj.id);
+        //         set_ui(imageObj);
+        //     }
+        //     modal.style.display = "none";
+        //     reset_from();
+        // });
 
         document.getElementById("prev_button").addEventListener('click', function () {
 

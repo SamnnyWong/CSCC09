@@ -8,8 +8,7 @@ const Datastore = require('nedb');
 const bodyParser = require('body-parser');
 
 
-var users = new Datastore({ filename: 'db/users.db', autoload: true });
-var messages = new Datastore({ filename: path.join(__dirname,'db', 'messages.db'), autoload: true, timestampData : true});
+
 
 app.use(bodyParser.json());
 app.use(express.static('static'));
@@ -20,12 +19,44 @@ app.use(function (req, res, next){
     next();
 });
 
-
 app.use(session({
     secret: 'please change this secret',
     resave: false,
     saveUninitialized: true,
 }));
+
+const http = require('http');
+const PORT = 3000;
+
+http.createServer(app).listen(PORT, function (err) {
+    if (err) console.log(err);
+    else console.log("HTTP server on http://localhost:%s", PORT);
+});
+
+
+function guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+}
+
+var users = new Datastore({ filename: 'db/users.db', autoload: true });
+var messages = new Datastore({ filename: path.join(__dirname,'db', 'messages.db'), autoload: true, timestampData : true});
+var images = new Datastore({ filename: 'db/images.db', autoload: true });
+var gallery = new Datastore({ filename: 'db/gallery.db', autoload: true });
+
+var multer  = require('multer');
+var upload = multer({ dest: path.join(__dirname, 'uploads')});
+
+// var user = {id: username, hash:"$$$$$", sLt:"$$$$$"};
+//
+// var gallery = {username:["imageid"]};
+//
+// var image = {imageid:"001", title: "title", author:"username"};
+//
+// var comments = {author:username, imageid:"%%%%%", };
+
 
 
 var isAuthenticated = function(req, res, next) {
@@ -144,10 +175,25 @@ app.delete('/api/messages/:id/', isAuthenticated, function (req, res, next) {
     }); 
 });
 
-const http = require('http');
-const PORT = 3002;
+app.post('/api/images/', upload.single("picture"), function (req, res, next) {
+    var image_id = guid();
+    var gallery = {username:["imageid"]}; 
+    images.insert({picture: req.file, _id :image_id}, function(err, user) {
+        if (err) return res.status(500).end(err);
+        // return res.redirect("/");
+    });
 
-http.createServer(app).listen(PORT, function (err) {
-    if (err) console.log(err);
-    else console.log("HTTP server on http://localhost:%s", PORT);
+    // get the username and image id
+    //find if the user gallery is existed or not
+    //add the newly added image id to the gallery
 });
+
+
+app.get('/api/users/', function (req, res, next) {
+    users.find({}, function (err, users) {
+        if (err) return res.status(500).end(err);
+        return res.json(users);
+        // console.log(users);
+    });
+});
+
